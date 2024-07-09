@@ -2,19 +2,19 @@ import { RequestHandler } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
-import { teamService } from './team.service';
+import { reviewService } from './review.service';
 
-const getTeams: RequestHandler = catchAsync(async (req, res) => {
-  const data = await teamService.getTeamDB();
+const getReviews: RequestHandler = catchAsync(async (req, res) => {
+  const data = await reviewService.getReviewDB();
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'retrieved teams successfully',
+    message: 'retrieved reviews successfully',
     data,
   });
 });
 
-export const teamController = {
-  getTeams
+export const reviewController = {
+  getReviews,
 };

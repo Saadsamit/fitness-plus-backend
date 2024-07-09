@@ -21,7 +21,7 @@ const getCategorie: RequestHandler = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Categorie retrieved successfully',
+    message: 'Retrieved Categorie successfully',
     data,
   });
 });
