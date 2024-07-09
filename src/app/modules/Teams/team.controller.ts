@@ -8,13 +8,13 @@ const getTeams: RequestHandler = catchAsync(async (req, res) => {
   const data = await teamService.getTeamDB();
 
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'retrieved teams successfully',
+    success: data.length ? true : false,
+    statusCode: data.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: data.length ? 'retrieved team successfully' : 'team not found',
     data,
   });
 });
 
 export const teamController = {
-  getTeams
+  getTeams,
 };

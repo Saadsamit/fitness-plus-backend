@@ -19,9 +19,9 @@ const getCategorie: RequestHandler = catchAsync(async (req, res) => {
   const data = await categorieService.getCategorieDB(req);
 
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Retrieved Categorie successfully',
+    success: data.length ? true : false,
+    statusCode: data.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: data.length ? 'Retrieved Categorie successfully' : 'categorie not found',
     data,
   });
 });

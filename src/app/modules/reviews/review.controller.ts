@@ -8,9 +8,9 @@ const getReviews: RequestHandler = catchAsync(async (req, res) => {
   const data = await reviewService.getReviewDB();
 
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'retrieved reviews successfully',
+    success: data.length ? true : false,
+    statusCode: data.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: data.length ? 'retrieved review successfully' : 'review not found',
     data,
   });
 });
