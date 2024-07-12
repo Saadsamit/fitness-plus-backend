@@ -4,12 +4,13 @@ import router from './app/routes';
 import notFound from './app/errors/notFound';
 import globalErrorHandler from './app/errors/globalErrorHandler';
 import basicRoute from './app/modules/basic';
+import config from './app/config';
 
 const app: Application = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://fitness-plus-tau.vercel.app'],
+    origin: config.url,
   }),
 );
 app.use(express.json());
