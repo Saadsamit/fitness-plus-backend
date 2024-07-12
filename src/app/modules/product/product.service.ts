@@ -7,15 +7,27 @@ const createProductDB = async (payload: TProduct) => {
 };
 
 const getAllProductDB = async (req: Request) => {
-  const page = Number(req.query?.page);
-  const limit = Number(req.query?.limit);
+  const page = Number(req.query?.page) || 1;
+  const limit = Number(req.query?.limit) || 4;
+  const skip = (page - 1) * limit;
+  const sort = (req.query.sort as string)?.split(',').join(' ') || '-createdAt';
+  const category = req.query.category;
+  const search = req.query.search;
 
-  if (page && limit) {
-    const skip = (page - 1) * limit;
-    return await product.find().limit(limit).skip(skip);
+  let find = {};
+  if (category) {
+    find = { category };
+  }
+  if (search) {
+    find = { ...find, name: { $regex: search, $options: 'i' } };
   }
 
-  return await product.find();
+  const data = await product.find(find).sort(sort).limit(limit).skip(skip);
+  const count = await product.estimatedDocumentCount();
+  return {
+    data,
+    count,
+  };
 };
 
 const getAProductDB = async (id: string) => {

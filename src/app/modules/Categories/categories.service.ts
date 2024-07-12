@@ -7,11 +7,10 @@ const createCategorieDB = async (payload: TCategories) => {
 };
 
 const getCategorieDB = async (req: Request) => {
-  let select = '';
+  const fields = (req.query.fields as string)?.split(',').join(' ') || '-__v';
   
-  if (req.query?.select) select = req.query?.select as string;
 
-  const data = await categorie.find().select(select);
+  const data = await categorie.find().select(fields);
   return data;
 };
 

@@ -16,7 +16,7 @@ const createProduct: RequestHandler = catchAsync(async (req, res) => {
 });
 
 const getAllProduct: RequestHandler = catchAsync(async (req, res) => {
-  const data = await productService.getAllProductDB(req);
+  const { data, count } = await productService.getAllProductDB(req);
 
   sendResponse(res, {
     success: data.length ? true : false,
@@ -25,6 +25,7 @@ const getAllProduct: RequestHandler = catchAsync(async (req, res) => {
       ? 'retrieved product successfully'
       : 'product not found',
     data,
+    count,
   });
 });
 
