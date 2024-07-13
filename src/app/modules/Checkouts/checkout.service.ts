@@ -25,7 +25,6 @@ const createCheckoutDB = async (payload: TCheckout) => {
     if (updateProduct.modifiedCount === 0) {
       throw new AppError(httpStatus.BAD_REQUEST, 'fail to checkout');
     }
-    console.log(updateProduct);
 
     const createCheckout = new checkout(payload);
     const result = await createCheckout.save({ session });

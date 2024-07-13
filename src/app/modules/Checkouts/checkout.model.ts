@@ -41,7 +41,7 @@ const checkoutSchema = new Schema<TCheckout>({
   },
   isPaid: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   totalPrice: {
     type: Number,

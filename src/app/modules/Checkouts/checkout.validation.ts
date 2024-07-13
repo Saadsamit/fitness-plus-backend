@@ -12,7 +12,6 @@ const checkoutSchemaValidation = z.object({
     phone: z.string(),
     address: z.string(),
     totalPrice: z.number(),
-    isPaid: z.boolean(),
     products: z.array(checkoutProductSchemaValidation),
   }),
 });

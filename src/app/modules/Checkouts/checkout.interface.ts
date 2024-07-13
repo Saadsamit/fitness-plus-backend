@@ -11,6 +11,6 @@ export interface TCheckout {
   phone: string;
   address: string;
   totalPrice: number;
-  isPaid: boolean;
+  isPaid?: boolean;
   products: TCheckoutProduct[];
 }

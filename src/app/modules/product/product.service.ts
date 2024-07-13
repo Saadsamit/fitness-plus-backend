@@ -22,7 +22,11 @@ const getAllProductDB = async (req: Request) => {
     find = { ...find, name: { $regex: search, $options: 'i' } };
   }
 
-  const data = await product.find(find).sort(sort).limit(limit).skip(skip);
+  const data = await product
+    .find({ ...find, stock: { $gte: 1 } })
+    .sort(sort)
+    .limit(limit)
+    .skip(skip);
   const count = await product.estimatedDocumentCount();
   return {
     data,
